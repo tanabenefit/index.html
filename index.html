@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoアプリ</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 8px;
+      margin-left: 5px;
+    }
+
+    li {
+      margin: 10px;
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ToDoアプリ</h1>
+
+  <input id="taskInput" placeholder="やることを入力">
+  <button onclick="addTask()">追加</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value;
+
+      if (taskText === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = taskText;
+
+      li.onclick = function() {
+        li.style.textDecoration =
+          li.style.textDecoration === "underline" ? "none" : "underline";
+      };
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "削除";
+      deleteBtn.onclick = function(event) {
+        event.stopPropagation();
+        li.remove();
+      };
+
+      li.appendChild(deleteBtn);
+      document.getElementById("taskList").appendChild(li);
+
+      input.value = "";
+    }
+  </script>
+
+</body>
+</html>
